@@ -66,7 +66,7 @@ app.post("/api/crafts", upload.single("img"), (req, res) => {
     });
 
     if (req.file) {
-      craft.img =  +req.file.filename;
+      craft.img =  req.file.filename;
     }
 
     createCraft(res, craft);
