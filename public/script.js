@@ -127,7 +127,9 @@ const getCrafts = async () => {
   
     //successfully got data from server
     if (response.status != 200) {
-      console.log("Error adding / editing data");
+      const { errors } = await response.json(); 
+      displayErrors(errors); 
+      return; 
     }
   
     await response.json();
@@ -135,7 +137,9 @@ const getCrafts = async () => {
     document.getElementById("dialog").style.display = "none";
     showCrafts();
   };
-  
+  const displayErrors = (errors) => {
+    alert(errors.join("\n"));
+  }
   const deleteCraft = async(craft)=> {
     let response = await fetch(`/api/crafts/${craft._id}`, {
       method:"DELETE",
